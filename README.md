@@ -2,7 +2,7 @@
 
 ### ABSTRAÇÃO
 No caso como o domínio deixa claro que são transações no mesmo banco eu não criei a Classe Banco, apenas as classes Cliente e a classe abstrata Conta e suas respectivas 
-subclasses ContaCorrente e ContaPoupanca;
+subclasses ContaCorrente e ContaPoupanca e a interface OperacaoBancaria;
 
 ### ENCAPSULAMENTO
 No caso todos os atributos das classes estão com o modificador de acesso PRIVATE e não foram gerados métodos Set indiscriminadamente, a classe Conta é abstrata não podendo
