@@ -8,7 +8,7 @@ public class ContaPoupanca extends Conta {
 		super();
 	}
 	
-	public ContaPoupanca(String agencia, String numero, String titular, BigDecimal saldo) {
-		super(agencia, numero, titular, saldo);
+	public ContaPoupanca(String agencia, String numero, Cliente cliente, BigDecimal saldo) {
+		super(agencia, numero, cliente, saldo);
 	}
 }

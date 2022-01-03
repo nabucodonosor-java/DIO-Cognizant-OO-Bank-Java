@@ -1,6 +1,8 @@
 package com.dio.bank.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.dio.bank.model.interfaces.OperacaoBancaria;
 
@@ -8,19 +10,24 @@ public abstract class Conta implements OperacaoBancaria {
 	
 	private String agencia;
 	private String numero;
-	private String titular;
 	private BigDecimal saldo;
+	private Cliente cliente;
+	private List<ServicoBancario> servicos = new ArrayList<>();
 	
 	public Conta() {}
 	
-	public Conta(String agencia, String numero, String titular, BigDecimal saldo) {
+	public Conta(String agencia, String numero, Cliente cliente, BigDecimal saldo) {
 		super();
 		this.agencia = agencia;
 		this.numero = numero;
-		this.titular = titular;
+		this.cliente = cliente;
 		this.saldo = saldo;
 	}
-
+	
+	public List<ServicoBancario> getServicos() {
+		return servicos;
+	}
+	
 	public String getAgencia() {
 		return agencia;
 	}
@@ -29,8 +36,8 @@ public abstract class Conta implements OperacaoBancaria {
 		return numero;
 	}
 
-	public String getTitular() {
-		return titular;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 	public BigDecimal getSaldo() {
@@ -48,6 +55,7 @@ public abstract class Conta implements OperacaoBancaria {
 		} else {
 			BigDecimal saldoTemp = this.saldo.add(valor);
 			this.saldo = saldoTemp;
+			servicos.add(new ServicoBancario("Depósito", valor));
 		}
 		
 	}
@@ -61,6 +69,7 @@ public abstract class Conta implements OperacaoBancaria {
 		} else {
 			BigDecimal saldoTemp = this.saldo.subtract(valor);
 			this.saldo = saldoTemp;
+			servicos.add(new ServicoBancario("Saque", valor));
 		}
 	}
 
@@ -71,10 +80,19 @@ public abstract class Conta implements OperacaoBancaria {
 		} else if (valor.compareTo(this.saldo) == 1) {
 			System.out.println("Saldo Insuficiente!");
 		} else {
-			destino.deposito(valor);
-			this.saque(valor);
+			BigDecimal saldoTempD = destino.getSaldo().add(valor);
+			destino.setSaldo(saldoTempD);;
+			BigDecimal saldoTemp = this.saldo.subtract(valor);
+			this.saldo = saldoTemp;
+			servicos.add(new ServicoBancario("Transferência", valor));
 		}
 		
+	}
+	
+	public void imprimirExtrato() {
+		for (ServicoBancario s : this.servicos) {
+			System.out.println(s);
+		}
 	}
 	
 	private boolean verificarValorInvalido(BigDecimal valor) {
@@ -86,12 +104,9 @@ public abstract class Conta implements OperacaoBancaria {
 		return false;
 	}
 	
-
 	@Override
 	public String toString() {
-		return "Conta [agencia=" + agencia + ", numero=" + numero + ", titular=" + titular + ", saldo=" + saldo + "]";
-	}
-	
-	
+		return "Conta [agencia=" + agencia + ", numero=" + numero + ", cliente=" + cliente.getNome() + ", saldo=" + saldo + "]";
+	}	
 
 }

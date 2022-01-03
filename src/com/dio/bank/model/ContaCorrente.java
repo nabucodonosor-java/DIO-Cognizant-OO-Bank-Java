@@ -8,8 +8,8 @@ public class ContaCorrente extends Conta {
 		super();
 	}
 
-	public ContaCorrente(String agencia, String numero, String titular, BigDecimal saldo) {
-		super(agencia, numero, titular, saldo);
+	public ContaCorrente(String agencia, String numero, Cliente cliente, BigDecimal saldo) {
+		super(agencia, numero, cliente, saldo);
 	}
 
 }
