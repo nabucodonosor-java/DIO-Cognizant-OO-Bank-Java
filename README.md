@@ -1,7 +1,12 @@
 # DIO-Cognizant-OO-Bank-Java
 
 ### ABSTRAÇÃO
-No caso como o domínio deixa claro que são transações no mesmo banco eu não criei a Classe Banco, apenas as classes Cliente, OperacaoBancaria e a classe abstrata Conta e suas respectivas subclasses ContaCorrente e ContaPoupanca e a interface ServicoBancario;
+No caso como o domínio deixa claro que são transações no mesmo banco eu não criei a Classe Banco, apenas as classes Cliente, OperacaoBancaria e a classe abstrata Conta e suas respectivas subclasses ContaCorrente e ContaPoupanca e a interface ServicoBancario. Outro ponto importante é que resolvi utilizar a classe BigDecimal pois segundo documentação
+é a classe ideal para se trabalhar com precisão com números em Java;
+
+#### MODELO DE DOMÍNIO
+
+![Web 1](https://personal-bucket-franco.s3.sa-east-1.amazonaws.com/dio-bank-oo.png)
 
 ### ENCAPSULAMENTO
 No caso todos os atributos das classes estão com o modificador de acesso PRIVATE e não foram gerados métodos Set indiscriminadamente, a classe Conta é abstrata não podendo
